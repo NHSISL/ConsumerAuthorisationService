@@ -1,0 +1,29 @@
+<Solution>
+  <Folder Name="/Build/">
+    <File Path=".editorconfig" />
+    <File Path=".github/copilot-instructions.md" />
+    <File Path=".github/dependabot.yml" />
+    <File Path=".github/workflows/build.yml" />
+    <File Path=".github/workflows/prLinter.yml" />
+    <File Path=".gitignore" />
+    <File Path="azure-pipelines.yml" />
+    <File Path="README.md" />
+    <Project Path="ConsumerAuthorizationService.Infrastructure/ConsumerAuthorizationService.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/Core/">
+    <Project Path="ConsumerAuthorizationService.Core.Tests.Unit/ConsumerAuthorizationService.Core.Tests.Unit.csproj" />
+    <Project Path="ConsumerAuthorizationService.Core/ConsumerAuthorizationService.Core.csproj" />
+  </Folder>
+  <Folder Name="/Documentation/" />
+  <Folder Name="/WebApps/" />
+  <Folder Name="/WebApps/Management/">
+    <Project Path="ConsumerAuthorizationService.Manage.Client/ConsumerAuthorizationService.Manage.Client.esproj">
+      <Build />
+      <Deploy />
+    </Project>
+    <Project Path="ConsumerAuthorizationService.Manage.Tests.Acceptance/ConsumerAuthorizationService.Manage.Tests.Acceptance.csproj" />
+    <Project Path="ConsumerAuthorizationService.Manage.Tests.Integration/ConsumerAuthorizationService.Manage.Tests.Integration.csproj" />
+    <Project Path="ConsumerAuthorizationService.Manage.Tests.Unit/ConsumerAuthorizationService.Manage.Tests.Unit.csproj" />
+    <Project Path="ConsumerAuthorizationService.Manage/ConsumerAuthorizationService.Manage.csproj" />
+  </Folder>
+</Solution>

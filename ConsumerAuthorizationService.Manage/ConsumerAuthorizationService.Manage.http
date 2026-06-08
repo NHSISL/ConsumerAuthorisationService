@@ -1,0 +1,6 @@
+@ConsumerAuthorizationService.Manage_HostAddress = http://localhost:5034
+
+GET {{ConsumerAuthorizationService.Manage_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

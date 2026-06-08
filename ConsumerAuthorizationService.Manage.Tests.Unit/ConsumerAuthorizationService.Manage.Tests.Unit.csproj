@@ -1,0 +1,49 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net10.0</TargetFramework>
+		<ImplicitUsings>disable</ImplicitUsings>
+		<Nullable>disable</Nullable>
+		<IsPackable>false</IsPackable>
+		<IsTestProject>true</IsTestProject>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="coverlet.collector" Version="10.0.1">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="FluentAssertions" Version="[7.2.2]" />
+		<PackageReference Include="ISL.Providers.ReIdentification.Abstractions" Version="0.0.0.5" />
+		<PackageReference Include="ISL.Providers.ReIdentification.DemoData" Version="0.0.0.5" />
+		<PackageReference Include="ISL.Providers.ReIdentification.Necs" Version="0.0.0.5" />
+		<PackageReference Include="ISL.Providers.ReIdentification.OfflineFileSources" Version="0.0.0.5" />
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="10.0.8" />
+		<PackageReference Include="RESTFulSense" Version="3.2.0" />
+		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.6.0" />
+		<PackageReference Include="Moq" Version="4.20.72" />
+		<PackageReference Include="xunit.analyzers" Version="1.27.0">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="xunit.runner.visualstudio" Version="3.1.5">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="xunit.v3" Version="3.2.2" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\ConsumerAuthorizationService.Manage.Client\ConsumerAuthorizationService.Manage.Client.esproj" />
+		<ProjectReference Include="..\ConsumerAuthorizationService.Manage\ConsumerAuthorizationService.Manage.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Using Include="Xunit" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Controllers\" />
+	</ItemGroup>
+
+</Project>
