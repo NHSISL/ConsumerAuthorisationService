@@ -1,0 +1,13 @@
+// ---------------------------------------------------------
+// Copyright (c) North East London ICB. All rights reserved.
+// ---------------------------------------------------------
+
+namespace ConsumerAuthorizationService.Core.Models.Orchestrations.Accesses
+{
+    public class AccessConfigurations
+    {
+        public bool UseHashedNhsNumber { get; set; } = true;
+        public string HashPepper { get; set; }
+        public bool CheckAccessPermissions { get; set; } = true;
+    }
+}

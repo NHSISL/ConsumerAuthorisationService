@@ -1,0 +1,19 @@
+// ---------------------------------------------------------
+// Copyright (c) North East London ICB. All rights reserved.
+// ---------------------------------------------------------
+
+using System;
+using System.Threading;
+using System.Threading.Tasks;
+using ConsumerAuthorizationService.Core.Models.Foundations.Accesses;
+
+namespace ConsumerAuthorizationService.Core.Services.Orchestrations.Accesses
+{
+    internal interface IAccessOrchestrationService
+    {
+        public ValueTask<Access> ValidateAccess(
+            string nhsNumber,
+            Guid correlationId,
+            CancellationToken cancellationToken = default);
+    }
+}
