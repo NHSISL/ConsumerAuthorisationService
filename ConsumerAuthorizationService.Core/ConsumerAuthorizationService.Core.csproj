@@ -26,6 +26,7 @@
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
 		<PackageReference Include="AWSSDK.Core" Version="4.0.8.1" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.8" />
 		<PackageReference Include="STX.EFCore.Client" Version="3.0.0" />
 		<PackageReference Include="Snowflake.Data" Version="5.6.0" />
 		<PackageReference Include="Xeption" Version="2.9.0" />
