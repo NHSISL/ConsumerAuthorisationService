@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
 		<TargetFramework>net10.0</TargetFramework>
@@ -27,7 +27,7 @@
 		</PackageReference>
 		<PackageReference Include="AWSSDK.Core" Version="4.0.8.1" />
 		<PackageReference Include="STX.EFCore.Client" Version="3.0.0" />
-		<PackageReference Include="Snowflake.Data" Version="5.2.0" />
+		<PackageReference Include="Snowflake.Data" Version="5.6.0" />
 		<PackageReference Include="Xeption" Version="2.9.0" />
 	</ItemGroup>
 

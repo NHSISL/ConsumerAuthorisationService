@@ -15,7 +15,7 @@ namespace ConsumerAuthorizationService.Infrastructure
             scriptGenerationService.GenerateBuildScript(
                 branchName: "main",
                 projectName: "ConsumerAuthorizationService.Core",
-                dotNetVersion: "10.0.x");
+                dotNetVersion: "10.x");
 
             scriptGenerationService.GeneratePrLintScript(branchName: "main");
         }
