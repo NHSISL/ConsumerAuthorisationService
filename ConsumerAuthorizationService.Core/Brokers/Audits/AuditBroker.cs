@@ -23,51 +23,51 @@ namespace ConsumerAuthorizationService.Core.Brokers.Audits
             string auditType,
             string title,
             string message,
-            string fileName,
             string correlationId,
+            string? fileName,
             string logLevel = "Information")
         {
-            return await auditClient.LogAuditAsync(auditType, title, message, fileName, correlationId, logLevel);
+            return await auditClient.LogAuditAsync(auditType, title, message, correlationId, fileName, logLevel);
         }
 
         public async ValueTask<Audit> LogInformationAsync(
             string auditType,
             string title,
             string message,
-            string fileName,
-            string correlationId)
+            string correlationId,
+            string? fileName)
         {
-            return await auditClient.LogAuditAsync(auditType, title, message, fileName, correlationId, "Information");
+            return await auditClient.LogAuditAsync(auditType, title, message, correlationId, fileName, "Information");
         }
 
         public async ValueTask<Audit> LogWarningAsync(
             string auditType,
             string title,
             string message,
-            string fileName,
-            string correlationId)
+            string correlationId,
+            string? fileName)
         {
-            return await auditClient.LogAuditAsync(auditType, title, message, fileName, correlationId, "Warning");
+            return await auditClient.LogAuditAsync(auditType, title, message, correlationId, fileName, "Warning");
         }
 
         public async ValueTask<Audit> LogErrorAsync(
             string auditType,
             string title,
             string message,
-            string fileName,
-            string correlationId)
+            string correlationId,
+            string? fileName)
         {
-            return await auditClient.LogAuditAsync(auditType, title, message, fileName, correlationId, "Error");
+            return await auditClient.LogAuditAsync(auditType, title, message, correlationId, fileName, "Error");
         }
 
         public async ValueTask<Audit> LogCriticalAsync(
             string auditType,
             string title,
             string message,
-            string fileName,
-            string correlationId)
+            string correlationId,
+            string? fileName)
         {
-            return await auditClient.LogAuditAsync(auditType, title, message, fileName, correlationId, "Critical");
+            return await auditClient.LogAuditAsync(auditType, title, message, correlationId, fileName, "Critical");
         }
     }
 }

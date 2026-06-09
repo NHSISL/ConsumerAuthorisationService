@@ -43,7 +43,7 @@ namespace ConsumerAuthorizationService.Core.Tests.Unit.Services.Foundations.Acce
             // when
             ValueTask<Access> validateTask = this.accessService.ValidateConsumerAccessToPatientAsync(
                 nhsNumber: invalidNhsNumber,
-                consumerId: randomConsumerId,
+                consumerUserId: randomConsumerId,
                 subscriberAgreementIds: randomSubscriberAgreementIds,
                 correlationId: randomCorrelationId,
                 cancellationToken: CancellationToken.None);
@@ -91,7 +91,7 @@ namespace ConsumerAuthorizationService.Core.Tests.Unit.Services.Foundations.Acce
                     message: "Invalid access. Please correct the errors and try again.");
 
             invalidAccessException.AddData(
-                key: "consumerId",
+                key: "consumerUserId",
                 values: "Text is required");
 
             var expectedAccessServiceValidationException =
@@ -102,7 +102,7 @@ namespace ConsumerAuthorizationService.Core.Tests.Unit.Services.Foundations.Acce
             // when
             ValueTask<Access> validateTask = this.accessService.ValidateConsumerAccessToPatientAsync(
                 nhsNumber: randomNhsNumber,
-                consumerId: invalidConsumerId,
+                consumerUserId: invalidConsumerId,
                 subscriberAgreementIds: randomSubscriberAgreementIds,
                 correlationId: randomCorrelationId,
                 cancellationToken: CancellationToken.None);
@@ -158,7 +158,7 @@ namespace ConsumerAuthorizationService.Core.Tests.Unit.Services.Foundations.Acce
             // when
             ValueTask<Access> validateTask = this.accessService.ValidateConsumerAccessToPatientAsync(
                 nhsNumber: randomNhsNumber,
-                consumerId: randomConsumerId,
+                consumerUserId: randomConsumerId,
                 subscriberAgreementIds: nullSubscriberAgreementIds,
                 correlationId: randomCorrelationId,
                 cancellationToken: CancellationToken.None);
@@ -214,7 +214,7 @@ namespace ConsumerAuthorizationService.Core.Tests.Unit.Services.Foundations.Acce
             // when
             ValueTask<Access> validateTask = this.accessService.ValidateConsumerAccessToPatientAsync(
                 nhsNumber: randomNhsNumber,
-                consumerId: randomConsumerId,
+                consumerUserId: randomConsumerId,
                 subscriberAgreementIds: randomSubscriberAgreementIds,
                 correlationId: emptyCorrelationId,
                 cancellationToken: CancellationToken.None);

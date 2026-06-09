@@ -42,8 +42,6 @@ namespace ConsumerAuthorizationService.Core.Services.Foundations.SubscriberAgree
                 (Rule: IsInvalid(subscriberAgreement.UpdatedBy),
                     Parameter: nameof(SubscriberAgreement.UpdatedBy)),
 
-                (Rule: IsGreaterThan(subscriberAgreement.ConsumerId, 255),
-                    Parameter: nameof(SubscriberAgreement.ConsumerId)),
 
                 (Rule: IsGreaterThan(subscriberAgreement.SubscriberAgreementId, 255),
                     Parameter: nameof(SubscriberAgreement.SubscriberAgreementId)),
@@ -108,8 +106,6 @@ namespace ConsumerAuthorizationService.Core.Services.Foundations.SubscriberAgree
                 (Rule: IsInvalid(subscriberAgreement.UpdatedBy),
                     Parameter: nameof(SubscriberAgreement.UpdatedBy)),
 
-                (Rule: IsGreaterThan(subscriberAgreement.ConsumerId, 255),
-                    Parameter: nameof(SubscriberAgreement.ConsumerId)),
 
                 (Rule: IsGreaterThan(subscriberAgreement.SubscriberAgreementId, 255),
                     Parameter: nameof(SubscriberAgreement.SubscriberAgreementId)),

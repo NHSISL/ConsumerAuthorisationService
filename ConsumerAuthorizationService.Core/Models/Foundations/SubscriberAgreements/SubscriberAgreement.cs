@@ -12,7 +12,7 @@ namespace ConsumerAuthorizationService.Core.Models.Foundations.SubscriberAgreeme
     public class SubscriberAgreement : IKey, IAudit
     {
         public Guid Id { get; set; }
-        public string ConsumerId { get; set; }
+        public Guid ConsumerId { get; set; }
         public string SubscriberAgreementId { get; set; }
         public string SubscriberAgreementName { get; set; }
         public string CreatedBy { get; set; }

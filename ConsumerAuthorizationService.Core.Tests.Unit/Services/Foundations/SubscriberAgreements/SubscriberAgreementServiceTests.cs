@@ -112,7 +112,7 @@ namespace ConsumerAuthorizationService.Core.Tests.Unit.Services.Foundations.Subs
             filler.Setup()
                 .OnType<DateTimeOffset>().Use(dateTimeOffset)
                 .OnType<DateTimeOffset?>().Use(dateTimeOffset)
-                .OnProperty(sa => sa.ConsumerId).Use(GetRandomStringWithLengthOf(255))
+                .OnProperty(sa => sa.ConsumerId).Use(Guid.NewGuid())
                 .OnProperty(sa => sa.SubscriberAgreementId).Use(GetRandomStringWithLengthOf(255))
                 .OnProperty(sa => sa.SubscriberAgreementName).Use(GetRandomStringWithLengthOf(255))
                 .OnProperty(sa => sa.CreatedBy).Use(userId)

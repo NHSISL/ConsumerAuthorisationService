@@ -39,7 +39,7 @@ namespace ConsumerAuthorizationService.Core.Tests.Unit.Services.Foundations.Acce
             // when
             Access actualAccess = await this.accessService.ValidateConsumerAccessToPatientAsync(
                 nhsNumber: randomNhsNumber,
-                consumerId: randomConsumerId,
+                consumerUserId: randomConsumerId,
                 subscriberAgreementIds: randomSubscriberAgreementIds,
                 correlationId: randomCorrelationId,
                 cancellationToken: cancellationToken);
@@ -84,7 +84,7 @@ namespace ConsumerAuthorizationService.Core.Tests.Unit.Services.Foundations.Acce
             // when
             Access actualAccess = await this.accessService.ValidateConsumerAccessToPatientAsync(
                 nhsNumber: randomNhsNumber,
-                consumerId: randomConsumerId,
+                consumerUserId: randomConsumerId,
                 subscriberAgreementIds: randomSubscriberAgreementIds,
                 correlationId: randomCorrelationId,
                 cancellationToken: cancellationToken);

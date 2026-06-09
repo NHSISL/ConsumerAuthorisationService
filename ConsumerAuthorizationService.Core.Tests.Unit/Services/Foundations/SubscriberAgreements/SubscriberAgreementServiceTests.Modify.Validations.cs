@@ -92,7 +92,7 @@ namespace ConsumerAuthorizationService.Core.Tests.Unit.Services.Foundations.Subs
 
             invalidSubscriberAgreementException.AddData(
                 key: nameof(SubscriberAgreement.ConsumerId),
-                values: "Text is required");
+                values: "Id is required");
 
             invalidSubscriberAgreementException.AddData(
                 key: nameof(SubscriberAgreement.SubscriberAgreementId),
@@ -190,17 +190,12 @@ namespace ConsumerAuthorizationService.Core.Tests.Unit.Services.Foundations.Subs
                 CreateRandomModifySubscriberAgreement(randomDateTimeOffset, userId: randomUserId);
 
             SubscriberAgreement invalidSubscriberAgreement = randomSubscriberAgreement;
-            invalidSubscriberAgreement.ConsumerId = GetRandomStringWithLengthOf(256);
             invalidSubscriberAgreement.SubscriberAgreementId = GetRandomStringWithLengthOf(256);
             invalidSubscriberAgreement.SubscriberAgreementName = GetRandomStringWithLengthOf(256);
 
             var invalidSubscriberAgreementException =
                 new InvalidSubscriberAgreementException(
                     message: "Invalid subscriber agreement. Please correct the errors and try again.");
-
-            invalidSubscriberAgreementException.AddData(
-                key: nameof(SubscriberAgreement.ConsumerId),
-                values: $"Text exceed max length of {invalidSubscriberAgreement.ConsumerId.Length - 1} characters");
 
             invalidSubscriberAgreementException.AddData(
                 key: nameof(SubscriberAgreement.SubscriberAgreementId),

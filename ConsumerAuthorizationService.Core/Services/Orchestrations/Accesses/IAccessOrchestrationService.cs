@@ -12,6 +12,7 @@ namespace ConsumerAuthorizationService.Core.Services.Orchestrations.Accesses
     internal interface IAccessOrchestrationService
     {
         public ValueTask<Access> ValidateAccess(
+            string consumerUserId,
             string nhsNumber,
             Guid correlationId,
             CancellationToken cancellationToken = default);

@@ -14,7 +14,7 @@ namespace ConsumerAuthorizationService.Core.Brokers.Storages.Snowflake
     {
         public async ValueTask<List<Access>> ValidateConsumerAccessToPatientAsync(
             string nhsNumber,
-            string consumerId,
+            string consumerUserId,
             List<string> subscriberAgreementIds,
             Guid correlationId,
             CancellationToken cancellationToken)
@@ -35,7 +35,7 @@ namespace ConsumerAuthorizationService.Core.Brokers.Storages.Snowflake
                 new Access
                 {
                     NhsNumber = nhsNumber,
-                    ConsumerId = consumerId,
+                    ConsumerId = consumerUserId,
                 }
             };
 
