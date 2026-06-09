@@ -13,9 +13,9 @@ namespace ConsumerAuthorizationService.Core
     {
         public StorageBroker CreateDbContext(string[] args)
         {
-            List<KeyValuePair<string, string>> config = new List<KeyValuePair<string, string>>
+            List<KeyValuePair<string, string?>> config = new List<KeyValuePair<string, string?>>
             {
-                new KeyValuePair<string, string>(
+                new KeyValuePair<string, string?>(
                     key: "ConnectionStrings:ConsumerAuthorizationServiceConnectionString",
                     value: "Server=(localdb)\\MSSQLLocalDB;Database=ConsumerAuthorizationService;" +
                         "Trusted_Connection=True;MultipleActiveResultSets=true"),

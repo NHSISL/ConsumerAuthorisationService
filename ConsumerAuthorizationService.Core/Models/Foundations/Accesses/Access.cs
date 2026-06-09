@@ -11,25 +11,25 @@ namespace ConsumerAuthorizationService.Core.Models.Foundations.Accesses
     public class Access
     {
         [JsonPropertyName("nhsNumber")]
-        public string NhsNumber { get; set; }
+        public string NhsNumber { get; set; } = string.Empty;
 
         [JsonPropertyName("consumerId")]
-        public string ConsumerId { get; set; }
+        public string ConsumerId { get; set; } = string.Empty;
 
         [JsonPropertyName("consumerOrgCode")]
-        public string ConsumerOrgCode { get; set; }
+        public string ConsumerOrgCode { get; set; } = string.Empty;
 
         [JsonPropertyName("isAccessAllowed")]
         public bool IsAccessAllowed { get; set; }
 
         [JsonPropertyName("allowedViaInformationSharingAgreements")]
-        public List<string> AllowedViaInformationSharingAgreements { get; set; }
+        public List<string> AllowedViaInformationSharingAgreements { get; set; } = new();
 
         [JsonPropertyName("allowedViaOrganisations")]
-        public List<string> AllowedViaOrganisations { get; set; }
+        public List<string> AllowedViaOrganisations { get; set; } = new();
 
         [JsonPropertyName("reasons")]
-        public List<AccessReason> Reasons { get; set; }
+        public List<AccessReason> Reasons { get; set; } = new();
 
         [JsonPropertyName("correlationId")]
         public Guid CorrelationId { get; set; }

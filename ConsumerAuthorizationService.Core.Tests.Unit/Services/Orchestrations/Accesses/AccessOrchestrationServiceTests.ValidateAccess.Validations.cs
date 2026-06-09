@@ -50,7 +50,7 @@ namespace ConsumerAuthorizationService.Core.Tests.Unit.Services.Orchestrations.A
 
             // when
             ValueTask<Access> validateAccessTask =
-                accessOrchestrationService.ValidateAccess(invalidText, invalidText, correlationId);
+                accessOrchestrationService.ValidateAccess(invalidText, invalidText, correlationId, TestContext.Current.CancellationToken);
 
             AccessOrchestrationValidationException actualAccessOrchestrationValidationException =
                 await Assert.ThrowsAsync<AccessOrchestrationValidationException>(
@@ -106,7 +106,7 @@ namespace ConsumerAuthorizationService.Core.Tests.Unit.Services.Orchestrations.A
 
             // when
             ValueTask<Access> validateAccessTask =
-                accessOrchestrationService.ValidateAccess(userId, inputNhsNumber, correlationId);
+                accessOrchestrationService.ValidateAccess(userId, inputNhsNumber, correlationId, TestContext.Current.CancellationToken);
 
             AccessOrchestrationValidationException actualAccessOrchestrationValidationException =
                 await Assert.ThrowsAsync<AccessOrchestrationValidationException>(
@@ -176,7 +176,7 @@ namespace ConsumerAuthorizationService.Core.Tests.Unit.Services.Orchestrations.A
 
             // when
             ValueTask<Access> validateAccessTask =
-                accessOrchestrationService.ValidateAccess(userId, inputNhsNumber, correlationId);
+                accessOrchestrationService.ValidateAccess(userId, inputNhsNumber, correlationId, TestContext.Current.CancellationToken);
 
             AccessOrchestrationValidationException actualAccessOrchestrationValidationException =
                 await Assert.ThrowsAsync<AccessOrchestrationValidationException>(
@@ -253,7 +253,7 @@ namespace ConsumerAuthorizationService.Core.Tests.Unit.Services.Orchestrations.A
 
             // when
             ValueTask<Access> validateAccessTask =
-                accessOrchestrationService.ValidateAccess(userId, inputNhsNumber, correlationId);
+                accessOrchestrationService.ValidateAccess(userId, inputNhsNumber, correlationId, TestContext.Current.CancellationToken);
 
             AccessOrchestrationValidationException actualAccessOrchestrationValidationException =
                 await Assert.ThrowsAsync<AccessOrchestrationValidationException>(
@@ -347,7 +347,7 @@ namespace ConsumerAuthorizationService.Core.Tests.Unit.Services.Orchestrations.A
 
             // when
             ValueTask<Access> validateAccessTask =
-                accessOrchestrationService.ValidateAccess(userId, inputNhsNumber, correlationId);
+                accessOrchestrationService.ValidateAccess(userId, inputNhsNumber, correlationId, TestContext.Current.CancellationToken);
 
             AccessOrchestrationValidationException actualAccessOrchestrationValidationException =
                 await Assert.ThrowsAsync<AccessOrchestrationValidationException>(

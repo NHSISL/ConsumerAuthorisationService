@@ -7,7 +7,7 @@ namespace ConsumerAuthorizationService.Core.Models.Orchestrations.Accesses
     public class AccessConfigurations
     {
         public bool UseHashedNhsNumber { get; set; } = true;
-        public string HashPepper { get; set; }
+        public string HashPepper { get; set; } = string.Empty;
         public bool CheckAccessPermissions { get; set; } = true;
     }
 }

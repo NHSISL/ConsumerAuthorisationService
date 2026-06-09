@@ -18,7 +18,7 @@ namespace ConsumerAuthorizationService.Core.Brokers.Securities
     public class SecurityBroker : ISecurityBroker
     {
         private readonly ClaimsPrincipal claimsPrincipal;
-        private string remoteIpAddress;
+        private string? remoteIpAddress;
         private readonly ISecurityClient securityClient;
 
         /// <summary>
@@ -30,7 +30,7 @@ namespace ConsumerAuthorizationService.Core.Brokers.Securities
         public SecurityBroker(IHttpContextAccessor httpContextAccessor)
         {
             claimsPrincipal = httpContextAccessor.HttpContext?.User ?? new ClaimsPrincipal();
-            remoteIpAddress = httpContextAccessor.HttpContext.Connection.RemoteIpAddress?.ToString();
+            remoteIpAddress = httpContextAccessor.HttpContext?.Connection.RemoteIpAddress?.ToString();
             securityClient = new SecurityClient();
         }
 
@@ -138,6 +138,6 @@ namespace ConsumerAuthorizationService.Core.Brokers.Securities
         /// </summary>
         /// <returns>An <see cref="string"/> object containing user details.</returns>
         public async ValueTask<string> GetIpAddressAsync() =>
-            await Task.FromResult(remoteIpAddress);
+            remoteIpAddress ?? string.Empty;
     }
 }

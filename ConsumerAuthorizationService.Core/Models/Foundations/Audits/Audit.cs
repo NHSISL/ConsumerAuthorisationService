@@ -10,7 +10,7 @@ namespace ConsumerAuthorizationService.Core.Models.Foundations.Audits
     public class Audit : IKey, IAudit
     {
         public Guid Id { get; set; }
-        public string CorrelationId { get; set; }
+        public string CorrelationId { get; set; } = string.Empty;
         public string AuditType { get; set; } = string.Empty;
         public string Title { get; set; } = string.Empty;
         public string Message { get; set; } = string.Empty;

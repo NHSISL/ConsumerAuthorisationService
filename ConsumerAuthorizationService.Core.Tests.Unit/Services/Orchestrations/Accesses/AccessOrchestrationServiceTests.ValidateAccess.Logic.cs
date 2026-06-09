@@ -69,7 +69,7 @@ namespace ConsumerAuthorizationService.Core.Tests.Unit.Services.Orchestrations.A
                     .ReturnsAsync(randomAccess);
 
             // when
-            Access actualAccess = await accessOrchestrationService.ValidateAccess(userId, inputNhsNumber, correlationId);
+            Access actualAccess = await accessOrchestrationService.ValidateAccess(userId, inputNhsNumber, correlationId, TestContext.Current.CancellationToken);
 
             // then
             actualAccess.Should().BeEquivalentTo(expectedAccess);
@@ -164,7 +164,7 @@ namespace ConsumerAuthorizationService.Core.Tests.Unit.Services.Orchestrations.A
                     .ReturnsAsync(randomAccess);
 
             // when
-            Access actualAccess = await accessOrchestrationService.ValidateAccess(userId, inputNhsNumber, correlationId);
+            Access actualAccess = await accessOrchestrationService.ValidateAccess(userId, inputNhsNumber, correlationId, TestContext.Current.CancellationToken);
 
             // then
             actualAccess.Should().BeEquivalentTo(expectedAccess);
