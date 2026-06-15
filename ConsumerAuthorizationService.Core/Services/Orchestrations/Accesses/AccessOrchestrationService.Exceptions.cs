@@ -140,7 +140,7 @@ namespace ConsumerAuthorizationService.Core.Services.Orchestrations.Accesses
                 new AccessOrchestrationDependencyValidationException(
                     message: "Access orchestration dependency validation error occurred, " +
                         "fix the errors and try again.",
-                    innerException: exception.InnerException as Xeption);
+                    innerException: (exception.InnerException as Xeption)!);
 
             await this.loggingBroker.LogErrorAsync(accessOrchestrationDependencyValidationException);
 
@@ -154,7 +154,7 @@ namespace ConsumerAuthorizationService.Core.Services.Orchestrations.Accesses
                 new AccessOrchestrationDependencyException(
                     message: "Access orchestration dependency error occurred, " +
                         "fix the errors and try again.",
-                    innerException: exception.InnerException as Xeption);
+                    innerException: (exception.InnerException as Xeption)!);
 
             await this.loggingBroker.LogErrorAsync(accessOrchestrationDependencyException);
 

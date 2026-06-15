@@ -16,36 +16,36 @@ namespace ConsumerAuthorizationService.Core.Brokers.Audits
             string auditType,
             string title,
             string message,
-            string fileName,
             string correlationId,
+            string? fileName,
             string logLevel = "Information");
 
         ValueTask<Audit> LogInformationAsync(
             string auditType,
             string title,
             string message,
-            string fileName,
-            string correlationId);
+            string correlationId,
+            string? fileName);
 
         ValueTask<Audit> LogWarningAsync(
             string auditType,
             string title,
             string message,
-            string fileName,
-            string correlationId);
+            string correlationId,
+            string? fileName);
 
         ValueTask<Audit> LogErrorAsync(
             string auditType,
             string title,
             string message,
-            string fileName,
-            string correlationId);
+            string correlationId,
+            string? fileName);
 
         ValueTask<Audit> LogCriticalAsync(
             string auditType,
             string title,
             string message,
-            string fileName,
-            string correlationId);
+            string correlationId,
+            string? fileName);
     }
 }

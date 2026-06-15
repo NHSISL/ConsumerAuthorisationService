@@ -20,12 +20,13 @@ namespace ConsumerAuthorizationService.Core.Tests.Unit.Services.Orchestrations.A
             Xeption dependencyException)
         {
             // given
+            string randomConsumerUserId = GetRandomString();
             string randomNhsNumber = GetRandomString();
             string inputNhsNumber = randomNhsNumber;
             Guid correlationId = Guid.NewGuid();
 
-            this.securityBrokerMock.Setup(broker =>
-                broker.GetCurrentUserAsync())
+            this.consumerServiceMock.Setup(service =>
+                service.RetrieveAllConsumersAsync())
                     .ThrowsAsync(dependencyException);
 
             var expectedAccessOrchestrationDependencyValidationException =
@@ -35,7 +36,8 @@ namespace ConsumerAuthorizationService.Core.Tests.Unit.Services.Orchestrations.A
                     innerException: dependencyException.InnerException as Xeption);
 
             // when
-            ValueTask<Access> validateAccessTask = accessOrchestrationService.ValidateAccess(inputNhsNumber, correlationId);
+            ValueTask<Access> validateAccessTask =
+                accessOrchestrationService.ValidateAccess(randomConsumerUserId, inputNhsNumber, correlationId, TestContext.Current.CancellationToken);
 
             AccessOrchestrationDependencyValidationException actualAccessOrchestrationDependencyValidationException =
                 await Assert.ThrowsAsync<AccessOrchestrationDependencyValidationException>(
@@ -45,8 +47,17 @@ namespace ConsumerAuthorizationService.Core.Tests.Unit.Services.Orchestrations.A
             actualAccessOrchestrationDependencyValidationException
                 .Should().BeEquivalentTo(expectedAccessOrchestrationDependencyValidationException);
 
-            this.securityBrokerMock.Verify(broker =>
-                broker.GetCurrentUserAsync(),
+            this.auditBrokerMock.Verify(broker =>
+                broker.LogInformationAsync(
+                    It.IsAny<string>(),
+                    It.IsAny<string>(),
+                    It.IsAny<string>(),
+                    It.IsAny<string>(),
+                    null),
+                        Times.Once);
+
+            this.consumerServiceMock.Verify(service =>
+                service.RetrieveAllConsumersAsync(),
                     Times.Once);
 
             this.loggingBrokerMock.Verify(broker =>
@@ -70,12 +81,13 @@ namespace ConsumerAuthorizationService.Core.Tests.Unit.Services.Orchestrations.A
             Xeption dependencyException)
         {
             // given
+            string randomConsumerUserId = GetRandomString();
             string randomNhsNumber = GetRandomString();
             string inputNhsNumber = randomNhsNumber;
             Guid correlationId = Guid.NewGuid();
 
-            this.securityBrokerMock.Setup(broker =>
-                broker.GetCurrentUserAsync())
+            this.consumerServiceMock.Setup(service =>
+                service.RetrieveAllConsumersAsync())
                     .ThrowsAsync(dependencyException);
 
             var expectedAccessOrchestrationDependencyException =
@@ -85,7 +97,8 @@ namespace ConsumerAuthorizationService.Core.Tests.Unit.Services.Orchestrations.A
                     innerException: dependencyException.InnerException as Xeption);
 
             // when
-            ValueTask<Access> validateAccessTask = accessOrchestrationService.ValidateAccess(inputNhsNumber, correlationId);
+            ValueTask<Access> validateAccessTask =
+                accessOrchestrationService.ValidateAccess(randomConsumerUserId, inputNhsNumber, correlationId, TestContext.Current.CancellationToken);
 
             AccessOrchestrationDependencyException actualAccessOrchestrationDependencyException =
                 await Assert.ThrowsAsync<AccessOrchestrationDependencyException>(
@@ -95,8 +108,17 @@ namespace ConsumerAuthorizationService.Core.Tests.Unit.Services.Orchestrations.A
             actualAccessOrchestrationDependencyException
                 .Should().BeEquivalentTo(expectedAccessOrchestrationDependencyException);
 
-            this.securityBrokerMock.Verify(broker =>
-                broker.GetCurrentUserAsync(),
+            this.auditBrokerMock.Verify(broker =>
+                broker.LogInformationAsync(
+                    It.IsAny<string>(),
+                    It.IsAny<string>(),
+                    It.IsAny<string>(),
+                    It.IsAny<string>(),
+                    null),
+                        Times.Once);
+
+            this.consumerServiceMock.Verify(service =>
+                service.RetrieveAllConsumersAsync(),
                     Times.Once);
 
             this.loggingBrokerMock.Verify(broker =>
@@ -119,12 +141,13 @@ namespace ConsumerAuthorizationService.Core.Tests.Unit.Services.Orchestrations.A
         {
             // given
             var serviceException = new Exception();
+            string randomConsumerUserId = GetRandomString();
             string randomNhsNumber = GetRandomString();
             string inputNhsNumber = randomNhsNumber;
             Guid correlationId = Guid.NewGuid();
 
-            this.securityBrokerMock.Setup(broker =>
-                broker.GetCurrentUserAsync())
+            this.consumerServiceMock.Setup(service =>
+                service.RetrieveAllConsumersAsync())
                     .ThrowsAsync(serviceException);
 
             var failedServiceAccessOrchestrationException =
@@ -139,7 +162,8 @@ namespace ConsumerAuthorizationService.Core.Tests.Unit.Services.Orchestrations.A
                     innerException: failedServiceAccessOrchestrationException);
 
             // when
-            ValueTask<Access> validateAccessTask = accessOrchestrationService.ValidateAccess(inputNhsNumber, correlationId);
+            ValueTask<Access> validateAccessTask =
+                accessOrchestrationService.ValidateAccess(randomConsumerUserId, inputNhsNumber, correlationId, TestContext.Current.CancellationToken);
 
             AccessOrchestrationServiceException actualAccessOrchestrationServiceException =
                 await Assert.ThrowsAsync<AccessOrchestrationServiceException>(
@@ -149,8 +173,17 @@ namespace ConsumerAuthorizationService.Core.Tests.Unit.Services.Orchestrations.A
             actualAccessOrchestrationServiceException
                 .Should().BeEquivalentTo(expectedAccessOrchestrationServiceException);
 
-            this.securityBrokerMock.Verify(broker =>
-                broker.GetCurrentUserAsync(),
+            this.auditBrokerMock.Verify(broker =>
+                broker.LogInformationAsync(
+                    It.IsAny<string>(),
+                    It.IsAny<string>(),
+                    It.IsAny<string>(),
+                    It.IsAny<string>(),
+                    null),
+                        Times.Once);
+
+            this.consumerServiceMock.Verify(service =>
+                service.RetrieveAllConsumersAsync(),
                     Times.Once);
 
             this.loggingBrokerMock.Verify(broker =>

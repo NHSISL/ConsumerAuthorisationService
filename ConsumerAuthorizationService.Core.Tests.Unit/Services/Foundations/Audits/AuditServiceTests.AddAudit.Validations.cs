@@ -65,8 +65,8 @@ namespace ConsumerAuthorizationService.Core.Tests.Unit.Services.Foundations.Audi
                     auditType: randomAuditType,
                     title: randomAuditTitle,
                     message: randomMessage,
-                    fileName: randomFileName,
                     correlationId: randomCorrelationId.ToString(),
+                    fileName: randomFileName,
                     logLevel: randomLogLevel);
 
             AuditValidationException actualAuditValidationException =

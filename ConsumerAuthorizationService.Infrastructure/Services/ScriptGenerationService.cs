@@ -7,7 +7,7 @@ using System.IO;
 using ADotNet.Clients;
 using ADotNet.Models.Pipelines.GithubPipelines.DotNets;
 using ADotNet.Models.Pipelines.GithubPipelines.DotNets.Tasks;
-using ADotNet.Models.Pipelines.GithubPipelines.DotNets.Tasks.SetupDotNetTaskV3s;
+using ADotNet.Models.Pipelines.GithubPipelines.DotNets.Tasks.SetupDotNetTaskV4s;
 
 namespace ConsumerAuthorizationService.Infrastructure.Services
 {
@@ -57,16 +57,16 @@ namespace ConsumerAuthorizationService.Infrastructure.Services
                                     Run = "git config --system core.longpaths true"
                                 },
 
-                                new CheckoutTaskV3
+                                new CheckoutTaskV4
                                 {
                                     Name = "Check out"
                                 },
 
-                                new SetupDotNetTaskV3
+                                new SetupDotNetTaskV4
                                 {
                                     Name = "Setup .Net",
 
-                                    With = new TargetDotNetVersionV3
+                                    With = new TargetDotNetVersionV4
                                     {
                                         DotNetVersion = dotNetVersion
                                     }

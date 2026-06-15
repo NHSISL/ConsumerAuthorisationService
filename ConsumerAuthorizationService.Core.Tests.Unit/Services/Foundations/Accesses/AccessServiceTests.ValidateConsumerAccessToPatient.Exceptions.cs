@@ -48,7 +48,7 @@ namespace ConsumerAuthorizationService.Core.Tests.Unit.Services.Foundations.Acce
             // when
             ValueTask<Access> validateTask = this.accessService.ValidateConsumerAccessToPatientAsync(
                 nhsNumber: randomNhsNumber,
-                consumerId: randomConsumerId,
+                consumerUserId: randomConsumerId,
                 subscriberAgreementIds: randomSubscriberAgreementIds,
                 correlationId: randomCorrelationId,
                 cancellationToken: cancellationToken);

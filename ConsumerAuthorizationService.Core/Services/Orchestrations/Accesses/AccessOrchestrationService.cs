@@ -23,7 +23,6 @@ using ConsumerAuthorizationService.Core.Models.Orchestrations.Accesses.Exception
 using ConsumerAuthorizationService.Core.Services.Foundations.Accesses;
 using ConsumerAuthorizationService.Core.Services.Foundations.Consumers;
 using ConsumerAuthorizationService.Core.Services.Foundations.SubscriberAgreements;
-using ISL.Security.Client.Models.Foundations.Users;
 
 namespace ConsumerAuthorizationService.Core.Services.Orchestrations.Accesses
 {
@@ -62,15 +61,16 @@ namespace ConsumerAuthorizationService.Core.Services.Orchestrations.Accesses
         }
 
         public ValueTask<Access> ValidateAccess(
+            string consumerUserId,
             string nhsNumber,
             Guid correlationId,
             CancellationToken cancellationToken = default) =>
             TryCatch(async () =>
             {
                 var stopwatch = Stopwatch.StartNew();
-                ValidateArguments(nhsNumber, correlationId);
-                User currentUser = await securityBroker.GetCurrentUserAsync();
-                string currentUserId = currentUser.UserId;
+                ValidateArguments(consumerUserId, nhsNumber, correlationId);
+                //User currentUser = await securityBroker.GetCurrentUserAsync();
+                //string currentUserId = currentUser.UserId;
 
                 JsonSerializerOptions options = new()
                 {
@@ -80,30 +80,22 @@ namespace ConsumerAuthorizationService.Core.Services.Orchestrations.Accesses
                     ReferenceHandler = ReferenceHandler.IgnoreCycles
                 };
 
-                string currentUserJson = JsonSerializer.Serialize(currentUser, options);
-
                 await this.auditBroker.LogInformationAsync(
                     auditType: "Access",
                     title: "Check Access Permissons",
-                    message: currentUserJson,
-                    fileName: null,
-                    correlationId: correlationId.ToString());
-
-                if (currentUser is null)
-                {
-                    throw new UnauthorizedAccessOrchestrationException(
-                        $"Current consumer is not a valid consumer.");
-                }
+                    message: $"Check access permissions for consumer with user id `{consumerUserId}`.",
+                    correlationId: correlationId.ToString(),
+                    fileName: null);
 
                 IQueryable<Consumer> consumers = await consumerService.RetrieveAllConsumersAsync();
 
-                Consumer matchingConsumer = consumers
-                    .FirstOrDefault(consumer => consumer.UserId == currentUserId && consumer.IsDeleted == false);
+                Consumer? matchingConsumer = consumers
+                    .FirstOrDefault(consumer => consumer.UserId == consumerUserId && consumer.IsDeleted == false);
 
                 if (matchingConsumer is null)
                 {
                     throw new UnauthorizedAccessOrchestrationException(
-                        $"Current consumer with id `{currentUserId}` is not a valid consumer.");
+                        $"Current consumer with user id `{consumerUserId}` is not a valid consumer.");
                 }
 
                 DateTimeOffset now = await dateTimeBroker.GetCurrentDateTimeOffsetAsync();
@@ -119,13 +111,13 @@ namespace ConsumerAuthorizationService.Core.Services.Orchestrations.Accesses
                             title: "Access Forbidden",
 
                             message:
-                                $"Access was forbidden as consumer with id {matchingConsumer.Id} " +
-                                $"is not active / does not have valid access window " +
+                                $"Access was forbidden as consumer with user id {matchingConsumer.UserId} " +
+                                $"is not active / does not have a valid access window " +
                                 $"(ActiveFrom: {matchingConsumer.ActiveFrom}, ActiveTo: {matchingConsumer.ActiveTo})  " +
                                 $"CorrelationId: {correlationId.ToString()}",
 
-                            fileName: null,
-                            correlationId: correlationId.ToString());
+                            correlationId: correlationId.ToString(),
+                            fileName: null);
 
                     throw new ForbiddenAccessOrchestrationException(
                         "Current consumer is not active or does not have a valid access window.  " +
@@ -137,18 +129,21 @@ namespace ConsumerAuthorizationService.Core.Services.Orchestrations.Accesses
 
                 subscriberAgreementsQueryable = subscriberAgreementsQueryable.Where(
                     subscriberAgreement => subscriberAgreement.IsDeleted == false &&
-                        subscriberAgreement.ConsumerId == currentUserId);
+                        subscriberAgreement.ConsumerId == matchingConsumer.Id);
 
                 List<SubscriberAgreement> subscriberAgreements = subscriberAgreementsQueryable.ToList();
 
-                Access access = await this.accessService.ValidateConsumerAccessToPatientAsync(
+                Access? access = await this.accessService.ValidateConsumerAccessToPatientAsync(
                     nhsNumber: nhsNumber,
-                    consumerId: currentUserId,
-                    subscriberAgreementIds: subscriberAgreements.Select(sa => sa.Id.ToString()).ToList(),
+                    consumerUserId: matchingConsumer.UserId,
+
+                    subscriberAgreementIds:
+                        [.. subscriberAgreements.Select(subscriberAgreement => subscriberAgreement.Id.ToString())],
+
                     correlationId,
                     cancellationToken);
 
-                return access;
+                return access!;
             });
     }
 }

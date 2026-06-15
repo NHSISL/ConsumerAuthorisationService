@@ -10,13 +10,14 @@ namespace ConsumerAuthorizationService.Core.Services.Orchestrations.Accesses
 {
     internal partial class AccessOrchestrationService
     {
-        public static void ValidateArguments(string nhsNumber, Guid correlationId)
+        public static void ValidateArguments(string consumerUserId, string nhsNumber, Guid correlationId)
         {
             Validate(
                 createException: () => new InvalidArgumentAccessOrchestrationException(
                     message:
                         "Invalid argument(s), please correct the errors and try again."),
 
+                (Rule: IsInvalid(consumerUserId), Parameter: nameof(consumerUserId)),
                 (Rule: IsInvalid(nhsNumber), Parameter: nameof(nhsNumber)),
                 (Rule: IsInvalid(correlationId), Parameter: nameof(correlationId)));
         }

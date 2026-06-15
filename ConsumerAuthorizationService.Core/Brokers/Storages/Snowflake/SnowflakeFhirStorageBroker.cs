@@ -65,7 +65,7 @@ namespace ConsumerAuthorizationService.Core.Brokers.Storages.Snowflake
             return results;
         }
 
-        private static string ReadVariantOrArrayAsString(IDataReader reader, string columnName)
+        private static string? ReadVariantOrArrayAsString(IDataReader reader, string columnName)
         {
             int i = reader.GetOrdinal(columnName);
 
@@ -78,7 +78,7 @@ namespace ConsumerAuthorizationService.Core.Brokers.Storages.Snowflake
             return value?.ToString();
         }
 
-        private static string ReadString(IDataReader reader, string columnName)
+        private static string? ReadString(IDataReader reader, string columnName)
         {
             int i = reader.GetOrdinal(columnName);
             return reader.IsDBNull(i) ? null : reader.GetString(i);

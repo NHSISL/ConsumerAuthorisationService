@@ -23,38 +23,38 @@ namespace ConsumerAuthorizationService.Core.Clients.Audits
             string auditType,
             string title,
             string message,
-            string fileName,
             string correlationId,
+            string? fileName,
             string logLevel = "Information")
         {
             try
             {
                 return await auditService
-                    .AddAuditAsync(auditType, title, message, fileName, correlationId, logLevel);
+                    .AddAuditAsync(auditType, title, message, correlationId, fileName, logLevel);
             }
             catch (AuditValidationException auditValidationException)
             {
                 throw new AuditClientValidationException(
                     message: "Audit client validation error occurred, fix errors and try again.",
-                    innerException: auditValidationException.InnerException as Xeption);
+                    innerException: (auditValidationException.InnerException as Xeption)!);
             }
             catch (AuditDependencyValidationException auditDependencyValidationException)
             {
                 throw new AuditClientValidationException(
                     message: "Audit client validation error occurred, fix errors and try again.",
-                    innerException: auditDependencyValidationException.InnerException as Xeption);
+                    innerException: (auditDependencyValidationException.InnerException as Xeption)!);
             }
             catch (AuditDependencyException auditDependencyException)
             {
                 throw new AuditClientDependencyException(
                     message: "Audit client dependency error occurred, please contact support.",
-                    innerException: auditDependencyException.InnerException as Xeption);
+                    innerException: (auditDependencyException.InnerException as Xeption)!);
             }
             catch (AuditServiceException auditServiceException)
             {
                 throw new AuditClientServiceException(
                     message: "Audit client service error occurred, fix errors and try again.",
-                    auditServiceException.InnerException as Xeption);
+                    (auditServiceException.InnerException as Xeption)!);
             }
         }
 
@@ -68,25 +68,25 @@ namespace ConsumerAuthorizationService.Core.Clients.Audits
             {
                 throw new AuditClientValidationException(
                     message: "Audit client validation error occurred, fix errors and try again.",
-                    innerException: auditValidationException.InnerException as Xeption);
+                    innerException: (auditValidationException.InnerException as Xeption)!);
             }
             catch (AuditDependencyValidationException auditDependencyValidationException)
             {
                 throw new AuditClientValidationException(
                     message: "Audit client validation error occurred, fix errors and try again.",
-                    innerException: auditDependencyValidationException.InnerException as Xeption);
+                    innerException: (auditDependencyValidationException.InnerException as Xeption)!);
             }
             catch (AuditDependencyException auditDependencyException)
             {
                 throw new AuditClientDependencyException(
                     message: "Audit client dependency error occurred, please contact support.",
-                    innerException: auditDependencyException.InnerException as Xeption);
+                    innerException: (auditDependencyException.InnerException as Xeption)!);
             }
             catch (AuditServiceException auditServiceException)
             {
                 throw new AuditClientServiceException(
                     message: "Audit client service error occurred, fix errors and try again.",
-                    auditServiceException.InnerException as Xeption);
+                    (auditServiceException.InnerException as Xeption)!);
             }
         }
     }

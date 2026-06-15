@@ -13,7 +13,7 @@ namespace ConsumerAuthorizationService.Core.Services.Foundations.Accesses
     {
         private static void ValidateAccessOnValidate(
             string nhsNumber,
-            string consumerId,
+            string consumerUserId,
             List<string> subscriberAgreementIds,
             Guid correlationId)
         {
@@ -22,7 +22,7 @@ namespace ConsumerAuthorizationService.Core.Services.Foundations.Accesses
                     message: "Invalid access. Please correct the errors and try again."),
 
                 (Rule: IsInvalid(nhsNumber), Parameter: nameof(nhsNumber)),
-                (Rule: IsInvalid(consumerId), Parameter: nameof(consumerId)),
+                (Rule: IsInvalid(consumerUserId), Parameter: nameof(consumerUserId)),
                 (Rule: IsInvalid(subscriberAgreementIds), Parameter: nameof(subscriberAgreementIds)),
                 (Rule: IsInvalid(correlationId), Parameter: nameof(correlationId)));
         }

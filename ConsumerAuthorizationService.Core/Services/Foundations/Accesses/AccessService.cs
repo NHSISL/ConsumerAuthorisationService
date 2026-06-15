@@ -28,18 +28,18 @@ namespace ConsumerAuthorizationService.Core.Services.Foundations.Accesses
 
         public ValueTask<Access?> ValidateConsumerAccessToPatientAsync(
             string nhsNumber,
-            string consumerId,
+            string consumerUserId,
             List<string> subscriberAgreementIds,
             Guid correlationId,
             CancellationToken cancellationToken) =>
             TryCatch(async () =>
             {
-                ValidateAccessOnValidate(nhsNumber, consumerId, subscriberAgreementIds, correlationId);
+                ValidateAccessOnValidate(nhsNumber, consumerUserId, subscriberAgreementIds, correlationId);
 
                 List<Access> accesses = await this.snowflakeFhirStorageBroker
                     .ValidateConsumerAccessToPatientAsync(
                         nhsNumber,
-                        consumerId,
+                        consumerUserId,
                         subscriberAgreementIds,
                         correlationId,
                         cancellationToken);

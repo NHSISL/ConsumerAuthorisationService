@@ -67,8 +67,8 @@ namespace ConsumerAuthorizationService.Core.Tests.Unit.Services.Foundations.Audi
                     auditType: randomAuditType,
                     title: randomAuditTitle,
                     message: randomMesssage,
-                    fileName: randomFileName,
                     correlationId: randomIdentifier.ToString(),
+                    fileName: randomFileName,
                     logLevel: randomLogLevel);
 
             // then

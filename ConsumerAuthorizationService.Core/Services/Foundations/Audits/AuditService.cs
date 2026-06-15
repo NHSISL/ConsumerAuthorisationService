@@ -44,8 +44,8 @@ namespace ConsumerAuthorizationService.Core.Services.Foundations.Audits
             string auditType,
             string title,
             string message,
-            string fileName,
             string correlationId,
+            string? fileName,
             string logLevel = "Information") =>
         TryCatch(async () =>
         {

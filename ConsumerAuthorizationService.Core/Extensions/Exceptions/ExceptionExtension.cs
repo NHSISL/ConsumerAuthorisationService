@@ -39,7 +39,7 @@ namespace ConsumerAuthorizationService.Core.Extensions.Exceptions
 
                 foreach (DictionaryEntry entry in exception.Data)
                 {
-                    string errorSummary = ((List<string>)entry.Value)
+                    string errorSummary = ((List<string>?)entry.Value ?? new List<string>())
                         .Select((value) => value)
                         .Aggregate((current, next) => current + ", " + next);
 

@@ -14,8 +14,8 @@ namespace ConsumerAuthorizationService.Core.Clients.Audits
             string auditType,
             string title,
             string message,
-            string fileName,
             string correlationId,
+            string? fileName,
             string logLevel = "Information");
 
         ValueTask BulkLogAuditsAsync(List<Audit> audits);

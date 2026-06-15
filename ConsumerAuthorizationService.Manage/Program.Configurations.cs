@@ -2,6 +2,7 @@
 // Copyright (c) North East London ICB. All rights reserved.
 // ---------------------------------------------------------
 
+#nullable enable
 using System;
 using System.Collections.Generic;
 using System.Text.Json;
