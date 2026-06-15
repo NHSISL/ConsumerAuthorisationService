@@ -16,6 +16,8 @@ using ConsumerAuthorizationService.Core.Brokers.Securities;
 using ConsumerAuthorizationService.Core.Brokers.Storages.Sql;
 using ConsumerAuthorizationService.Core.Clients.Audits;
 using ConsumerAuthorizationService.Core.Models.Foundations.Audits;
+using ConsumerAuthorizationService.Core.Models.Foundations.Consumers;
+using ConsumerAuthorizationService.Core.Models.Foundations.SubscriberAgreements;
 using ISL.Security.Client.Models.Clients;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -97,7 +99,10 @@ public partial class Program
         JsonNamingPolicy jsonNamingPolicy = JsonNamingPolicy.CamelCase;
 
         builder.Services
-            .AddControllers()
+            .AddControllers(options =>
+            {
+                options.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes = true;
+            })
             .AddOData(options =>
             {
                 options.AddRouteComponents("odata", GetEdmModel());
@@ -157,6 +162,15 @@ public partial class Program
     {
         ODataConventionModelBuilder builder = new();
         builder.EntitySet<Audit>("Audits");
+
+        var consumerEntityType = builder.EntitySet<Consumer>("Consumers").EntityType;
+        consumerEntityType.HasKey(c => c.Id);
+        consumerEntityType.Ignore(c => c.SubscriberAgreements);
+
+        var subscriberAgreementEntityType = builder.EntitySet<SubscriberAgreement>("SubscriberAgreements").EntityType;
+        subscriberAgreementEntityType.HasKey(s => s.Id);
+        subscriberAgreementEntityType.Ignore(s => s.Consumer);
+
         builder.EnableLowerCamelCase();
         return builder.GetEdmModel();
     }

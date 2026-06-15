@@ -9,6 +9,10 @@ using System.Linq;
 using System.Threading;
 using Attrify.InvisibleApi.Models;
 using ConsumerAuthorizationService.Core.Models.Foundations.Accesses;
+using ConsumerAuthorizationService.Core.Models.Foundations.Consumers;
+using ConsumerAuthorizationService.Core.Models.Foundations.SubscriberAgreements;
+using ConsumerAuthorizationService.Core.Services.Foundations.Consumers;
+using ConsumerAuthorizationService.Core.Services.Foundations.SubscriberAgreements;
 using ConsumerAuthorizationService.Core.Services.Orchestrations.Accesses;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Hosting;
@@ -80,6 +84,54 @@ namespace ConsumerAuthorizationService.Manage.Tests.Acceptance.Brokers
                     });
 
             services.AddTransient<IAccessOrchestrationService>(_ => accessOrchestrationServiceMock.Object);
+
+            var consumerServiceMock = new Mock<IConsumerService>();
+
+            consumerServiceMock
+                .Setup(service => service.AddConsumerAsync(It.IsAny<Consumer>()))
+                .ReturnsAsync((Consumer consumer) => consumer);
+
+            consumerServiceMock
+                .Setup(service => service.RetrieveAllConsumersAsync())
+                .ReturnsAsync(Enumerable.Empty<Consumer>().AsQueryable());
+
+            consumerServiceMock
+                .Setup(service => service.RetrieveConsumerByIdAsync(It.IsAny<Guid>()))
+                .ReturnsAsync((Guid id) => new Consumer { Id = id });
+
+            consumerServiceMock
+                .Setup(service => service.ModifyConsumerAsync(It.IsAny<Consumer>()))
+                .ReturnsAsync((Consumer consumer) => consumer);
+
+            consumerServiceMock
+                .Setup(service => service.RemoveConsumerByIdAsync(It.IsAny<Guid>()))
+                .ReturnsAsync((Guid id) => new Consumer { Id = id });
+
+            services.AddTransient<IConsumerService>(_ => consumerServiceMock.Object);
+
+            var subscriberAgreementServiceMock = new Mock<ISubscriberAgreementService>();
+
+            subscriberAgreementServiceMock
+                .Setup(service => service.AddSubscriberAgreementAsync(It.IsAny<SubscriberAgreement>()))
+                .ReturnsAsync((SubscriberAgreement subscriberAgreement) => subscriberAgreement);
+
+            subscriberAgreementServiceMock
+                .Setup(service => service.RetrieveAllSubscriberAgreementsAsync())
+                .ReturnsAsync(Enumerable.Empty<SubscriberAgreement>().AsQueryable());
+
+            subscriberAgreementServiceMock
+                .Setup(service => service.RetrieveSubscriberAgreementByIdAsync(It.IsAny<Guid>()))
+                .ReturnsAsync((Guid id) => new SubscriberAgreement { Id = id });
+
+            subscriberAgreementServiceMock
+                .Setup(service => service.ModifySubscriberAgreementAsync(It.IsAny<SubscriberAgreement>()))
+                .ReturnsAsync((SubscriberAgreement subscriberAgreement) => subscriberAgreement);
+
+            subscriberAgreementServiceMock
+                .Setup(service => service.RemoveSubscriberAgreementByIdAsync(It.IsAny<Guid>()))
+                .ReturnsAsync((Guid id) => new SubscriberAgreement { Id = id });
+
+            services.AddTransient<ISubscriberAgreementService>(_ => subscriberAgreementServiceMock.Object);
         }
 
         private static void OverrideSecurityForTesting(IServiceCollection services)
