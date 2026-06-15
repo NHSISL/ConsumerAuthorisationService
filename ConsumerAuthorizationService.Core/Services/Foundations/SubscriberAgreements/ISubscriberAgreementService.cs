@@ -9,7 +9,7 @@ using ConsumerAuthorizationService.Core.Models.Foundations.SubscriberAgreements;
 
 namespace ConsumerAuthorizationService.Core.Services.Foundations.SubscriberAgreements
 {
-    internal interface ISubscriberAgreementService
+    public interface ISubscriberAgreementService
     {
         ValueTask<SubscriberAgreement> AddSubscriberAgreementAsync(SubscriberAgreement subscriberAgreement);
         ValueTask<IQueryable<SubscriberAgreement>> RetrieveAllSubscriberAgreementsAsync();
