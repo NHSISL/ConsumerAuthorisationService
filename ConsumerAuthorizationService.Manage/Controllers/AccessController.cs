@@ -37,9 +37,21 @@ namespace ConsumerAuthorizationService.Manage.Controllers
 
                 return Ok(access);
             }
-            catch (Exception exception)
+            catch (AccessOrchestrationValidationException accessOrchestrationValidationException)
             {
-                return InternalServerError(exception);
+                return BadRequest(accessOrchestrationValidationException.InnerException);
+            }
+            catch (AccessOrchestrationDependencyValidationException accessOrchestrationDependencyValidationException)
+            {
+                return BadRequest(accessOrchestrationDependencyValidationException.InnerException);
+            }
+            catch (AccessOrchestrationDependencyException accessOrchestrationDependencyException)
+            {
+                return InternalServerError(accessOrchestrationDependencyException);
+            }
+            catch (AccessOrchestrationServiceException accessOrchestrationServiceException)
+            {
+                return InternalServerError(accessOrchestrationServiceException);
             }
         }
     }
