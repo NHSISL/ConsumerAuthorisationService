@@ -7,12 +7,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using ConsumerAuthorizationService.Core.Models.Foundations.Consumers;
 using ConsumerAuthorizationService.Core.Services.Foundations.Consumers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OData.Query;
 using RESTFulSense.Controllers;
 
 namespace ConsumerAuthorizationService.Manage.Controllers
 {
+    [Authorize(Roles = "Administrators,Users")]
     [ApiController]
     [Route("api/[controller]")]
     public class ConsumersController : RESTFulController
