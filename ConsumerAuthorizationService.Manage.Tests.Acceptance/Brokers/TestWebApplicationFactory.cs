@@ -6,12 +6,16 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using Attrify.InvisibleApi.Models;
+using ConsumerAuthorizationService.Core.Models.Foundations.Accesses;
+using ConsumerAuthorizationService.Core.Services.Orchestrations.Accesses;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Moq;
 
 namespace ConsumerAuthorizationService.Manage.Tests.Acceptance.Brokers
 {
@@ -41,6 +45,7 @@ namespace ConsumerAuthorizationService.Manage.Tests.Acceptance.Brokers
             };
 
             Program.ExcludeAppInsightsForTesting = true;
+            Program.ExcludeMigrationsForTesting = true;
         }
 
         protected override void ConfigureWebHost(IWebHostBuilder builder)
@@ -51,7 +56,30 @@ namespace ConsumerAuthorizationService.Manage.Tests.Acceptance.Brokers
             builder.ConfigureServices((context, services) =>
             {
                 OverrideSecurityForTesting(services);
+                MockServicesForTesting(services);
             });
+        }
+
+        private static void MockServicesForTesting(IServiceCollection services)
+        {
+            var accessOrchestrationServiceMock = new Mock<IAccessOrchestrationService>();
+
+            accessOrchestrationServiceMock
+                .Setup(service => service.ValidateAccess(
+                    It.IsAny<string>(),
+                    It.IsAny<string>(),
+                    It.IsAny<Guid>(),
+                    It.IsAny<CancellationToken>()))
+                .ReturnsAsync((string consumerUserId, string nhsNumber, Guid correlationId, CancellationToken _) =>
+                    new Access
+                    {
+                        NhsNumber = nhsNumber,
+                        ConsumerId = consumerUserId,
+                        IsAccessAllowed = true,
+                        CorrelationId = correlationId
+                    });
+
+            services.AddTransient<IAccessOrchestrationService>(_ => accessOrchestrationServiceMock.Object);
         }
 
         private static void OverrideSecurityForTesting(IServiceCollection services)
