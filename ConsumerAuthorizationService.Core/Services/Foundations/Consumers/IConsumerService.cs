@@ -9,7 +9,7 @@ using ConsumerAuthorizationService.Core.Models.Foundations.Consumers;
 
 namespace ConsumerAuthorizationService.Core.Services.Foundations.Consumers
 {
-    internal interface IConsumerService
+    public interface IConsumerService
     {
         ValueTask<Consumer> AddConsumerAsync(Consumer consumer);
         ValueTask<IQueryable<Consumer>> RetrieveAllConsumersAsync();

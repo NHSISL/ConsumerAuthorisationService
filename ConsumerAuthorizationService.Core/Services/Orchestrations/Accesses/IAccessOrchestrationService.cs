@@ -9,7 +9,7 @@ using ConsumerAuthorizationService.Core.Models.Foundations.Accesses;
 
 namespace ConsumerAuthorizationService.Core.Services.Orchestrations.Accesses
 {
-    internal interface IAccessOrchestrationService
+    public interface IAccessOrchestrationService
     {
         public ValueTask<Access> ValidateAccess(
             string consumerUserId,

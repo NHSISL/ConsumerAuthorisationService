@@ -49,11 +49,14 @@ Program.ConfigureApplicationInsightsTelemetry(builder);
 
 var app = builder.Build();
 
-// Always run migrations at startup
-using (var scope = app.Services.CreateScope())
+// Run migrations unless explicitly skipped (e.g., in acceptance tests)
+if (!Program.ExcludeMigrationsForTesting)
 {
-    var storageBroker = scope.ServiceProvider.GetRequiredService<StorageBroker>();
-    storageBroker.Database.Migrate();
+    using (var scope = app.Services.CreateScope())
+    {
+        var storageBroker = scope.ServiceProvider.GetRequiredService<StorageBroker>();
+        storageBroker.Database.Migrate();
+    }
 }
 
 // Configure middleware pipeline

@@ -34,6 +34,9 @@
 
 	<ItemGroup>
 		<InternalsVisibleTo Include="ConsumerAuthorizationService.Core.Tests.Unit" />
+		<InternalsVisibleTo Include="ConsumerAuthorizationService.Manage" />
+		<InternalsVisibleTo Include="ConsumerAuthorizationService.Manage.Tests.Unit" />
+		<InternalsVisibleTo Include="ConsumerAuthorizationService.Manage.Tests.Acceptance" />
 		<InternalsVisibleTo Include="DynamicProxyGenAssembly2" />
 	</ItemGroup>
 
