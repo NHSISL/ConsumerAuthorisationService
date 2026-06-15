@@ -27,6 +27,7 @@
 		</PackageReference>
 		<PackageReference Include="Microsoft.Identity.Web" Version="4.10.0" />
 		<PackageReference Include="NHSISL.CsvHelperClient" Version="3.1.0" />
+		<PackageReference Include="RESTFulSense" Version="3.2.0" />
 		<PackageReference Include="Swashbuckle.AspNetCore" Version="10.2.1" />
 		<PackageReference Include="System.Configuration.ConfigurationManager" Version="10.0.8" />
 	</ItemGroup>
